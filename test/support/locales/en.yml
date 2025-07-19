@@ -1,0 +1,33 @@
+en:
+  activerecord:
+    models:
+      user: "User"
+      post: "Post"
+      profile: "Profile"
+      avatar: "Avatar"
+      follow: "Follow"
+      notification: "Notification"
+      community: "Community"
+      tag: "Tag"
+    attributes:
+      user:
+        name: "Name"
+        created_at: "Created At"
+        updated_at: "Updated At"
+      post:
+        title: "Title"
+        body: "Body"
+        user_id: "User ID"
+        created_at: "Created At"
+        updated_at: "Updated At"
+      profile:
+        user_id: "User ID"
+        bio: "Bio"
+        created_at: "Created At"
+        updated_at: "Updated At"
+      notification:
+        user_id: "User ID"
+        sender_id: "Sender ID"
+        message: "Message"
+        created_at: "Created At"
+        updated_at: "Updated At"

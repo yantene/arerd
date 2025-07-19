@@ -1,0 +1,18 @@
+name: "arerd"
+
+services:
+  arerd:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+
+    volumes:
+    - ../..:/workspaces:cached
+    - ./fish/conf.d/abbrs.fish:/home/vscode/.config/fish/conf.d/abbrs.fish
+    - ./fish/functions/git.fish:/home/vscode/.config/fish/conf.d/git.fish
+
+    # Overrides default command so things don't shut down after the process ends.
+    command: sleep infinity
+
+    # Uncomment the next line to use a non-root user for all processes.
+    user: vscode

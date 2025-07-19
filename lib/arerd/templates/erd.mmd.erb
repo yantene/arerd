@@ -1,0 +1,43 @@
+erDiagram
+<%- models.each do |model| -%>
+  <%- foreign_keys = model.reflect_on_all_associations.map(&:foreign_key).uniq -%>
+  <%- indexes = (model.connection.indexes(model.table_name) rescue []) -%>
+  <%- unique_columns = (indexes.select(&:unique).flat_map(&:columns) rescue []) -%>
+  <%= model.name %>["<%= [model.name, "(#{model.model_name.human})"].compact.join(" ") %>"] {
+  <%- model.columns.each do |column| -%>
+    <%= [
+      column.type,
+      column.name,
+      if model.primary_key == column.name
+        "PK"
+      elsif foreign_keys.include?(column.name)
+        "FK"
+      elsif unique_columns.include?(column.name)
+        "UK"
+      end,
+      "\"#{
+        model.human_attribute_name(column.name)
+      }#{
+        [
+          column.null ? "nullable" : nil,
+          (indexes.any? { |idx| idx.columns.include?(column.name) } ? "indexed" : nil),
+        ].compact.join(", ").then { |c| c == "" ? "" : " (#{c})" }
+      }\"",
+    ].compact.join(" ") %>
+  <%- end -%>
+  }
+<%- end -%>
+
+<%- associations.each do |association| -%>
+  <%=
+    association.left_model.name
+  %> <%=
+    { one: "||", many: "}o", optional_one: "|o", optional_many: "}o" }[association.left_side_multiplicity]
+  %>--<%=
+    { one: "||", many: "o{", optional_one: "o|", optional_many: "o{" }[association.right_side_multiplicity]
+  %> <%=
+    association.right_model.name
+  %> : "<%=
+    "#{association.left_association_name} / #{association.right_association_name}"
+  %>"
+<%- end -%>

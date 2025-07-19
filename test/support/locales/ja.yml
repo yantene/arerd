@@ -1,0 +1,33 @@
+ja:
+  activerecord:
+    models:
+      user: "ユーザー"
+      post: "投稿"
+      profile: "プロフィール"
+      avatar: "アバター"
+      follow: "フォロー"
+      notification: "通知"
+      community: "コミュニティ"
+      tag: "タグ"
+    attributes:
+      user:
+        name: "名前"
+        created_at: "作成日時"
+        updated_at: "更新日時"
+      post:
+        title: "タイトル"
+        body: "本文"
+        user_id: "ユーザーID"
+        created_at: "作成日時"
+        updated_at: "更新日時"
+      profile:
+        user_id: "ユーザーID"
+        bio: "自己紹介"
+        created_at: "作成日時"
+        updated_at: "更新日時"
+      notification:
+        user_id: "ユーザーID"
+        sender_id: "送信者ID"
+        message: "メッセージ"
+        created_at: "作成日時"
+        updated_at: "更新日時"
