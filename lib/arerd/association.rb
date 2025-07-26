@@ -2,6 +2,8 @@
 
 module Arerd
   class Association
+    include Comparable
+
     attr_reader :left_model, :left_key, :left_association_name,
       :right_model, :right_key, :right_association_name,
       :left_side_multiplicity, :right_side_multiplicity
@@ -24,6 +26,13 @@ module Arerd
       @right_association_name = right_association_name
       @left_side_multiplicity = left_side_multiplicity
       @right_side_multiplicity = right_side_multiplicity
+    end
+
+    def <=>(other)
+      return nil unless other.is_a?(Association)
+
+      [left_model.name, right_model.name, left_association_name.to_s, right_association_name.to_s] <=>
+        [other.left_model.name, other.right_model.name, other.left_association_name.to_s, other.right_association_name.to_s]
     end
 
     def self.build(association)

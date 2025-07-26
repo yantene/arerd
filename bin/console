@@ -2,10 +2,27 @@
 # frozen_string_literal: true
 
 require 'bundler/setup'
+require 'active_record'
 require 'arerd'
+require 'i18n'
 
-# You can add fixtures and/or initialization code here to make experimenting
-# with your gem easier. You can also use a different console, if you like.
+# Setup DB connection and schema for console
+ActiveRecord::Base.establish_connection(adapter: "sqlite3", database: ":memory:")
+
+# Load schema
+require_relative '../test/support/schema'
+
+# Load models
+require_relative '../test/support/models'
+
+# I18n
+I18n.load_path += Dir[File.expand_path("../test/support/locales/*.yml", __dir__)]
+I18n.available_locales = [:en, :ja]
+I18n.default_locale = :en
+
+puts "Console initialized with test models: #{MODELS.map(&:name).join(', ')}"
+puts "Available locales: #{I18n.available_locales.join(', ')}"
+puts "Database connection established (SQLite in memory)"
 
 require 'irb'
 IRB.start(__FILE__)
