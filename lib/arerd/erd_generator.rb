@@ -22,9 +22,11 @@ module Arerd
     def self.collect_models_and_associations
       Rails.application.eager_load!
 
-      models = ApplicationRecord.descendants
+      models = ApplicationRecord.descendants.sort_by(&:name)
 
-      associations = Arerd::Association.build_associations_from_models(models)
+      associations = Arerd::Association
+        .build_associations_from_models(models)
+        .sort
 
       {models:, associations:}
     end
