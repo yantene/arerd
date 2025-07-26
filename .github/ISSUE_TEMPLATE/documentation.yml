@@ -1,0 +1,44 @@
+---
+name: "Documentation Issue"
+about: "Report an issue with documentation or suggest improvements"
+title: ""
+labels: ["documentation"]
+assignees: []
+---
+
+## Documentation Issue
+<!-- A clear and concise description of the documentation issue -->
+
+## Location
+<!-- Please specify where the documentation issue is located -->
+
+- **File/Page**:
+- **Section**:
+- **URL**:
+
+## Issue Type
+<!-- Please check the applicable items -->
+
+- [ ] Information is incorrect/outdated
+- [ ] Information is missing
+- [ ] Explanation is unclear
+- [ ] Code samples don't work
+- [ ] Typos/grammar errors
+- [ ] Other
+
+## Current Content
+<!-- Please provide the current content (if applicable) -->
+
+```
+Current content here
+```
+
+## Suggested Improvement
+<!-- Please provide your suggested improvement -->
+
+```
+Improved content here
+```
+
+## Additional Context
+<!-- Add any other context about the documentation issue -->

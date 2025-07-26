@@ -1,0 +1,38 @@
+---
+name: "Question"
+about: "Ask a question about usage or troubleshooting"
+title: ""
+labels: ["question"]
+assignees: []
+---
+
+## Question
+<!-- Please state your question clearly -->
+
+## What are you trying to achieve?
+<!-- Describe what you're trying to accomplish -->
+
+## What have you tried?
+<!-- Describe what you've already attempted -->
+
+1.
+2.
+3.
+
+## Code/Configuration
+<!-- Please provide relevant code or configuration -->
+
+```ruby
+# Your code here
+```
+
+## Environment
+<!-- Please complete the following information -->
+
+- **OS**: [e.g., macOS 14.0, Ubuntu 22.04]
+- **Ruby version**: [e.g., 3.2.0]
+- **Rails version**: [e.g., 7.1.0]
+- **arerd version**: [e.g., 1.0.0]
+
+## Additional Context
+<!-- Add any other context about your question -->
