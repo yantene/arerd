@@ -1,26 +1,59 @@
----
-name: "Feature Request"
-about: "Suggest a new feature for this project"
-title: ""
+name: Feature Request
+description: Suggest a new feature for this project
+title: "[Feature] "
 labels: ["enhancement"]
 assignees: []
----
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a new feature!
 
-## Feature Description
-<!-- A clear and concise description of the feature you'd like to see -->
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Feature Description
+      description: A clear and concise description of the feature you'd like to see
+      placeholder: Describe the feature...
+    validations:
+      required: true
 
-## Motivation
-<!-- Please describe the motivation or use case for this feature -->
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation
+      description: Please describe the motivation or use case for this feature
+      placeholder: Why do you need this feature?
+    validations:
+      required: true
 
-## Proposed Implementation
-<!-- If you have ideas about how this could be implemented, please share them -->
+  - type: textarea
+    id: proposed-implementation
+    attributes:
+      label: Proposed Implementation
+      description: If you have ideas about how this could be implemented, please share them
+      placeholder: |
+        ```ruby
+        # Usage example (if applicable)
+        ```
+      render: markdown
+    validations:
+      required: false
 
-```ruby
-# Usage example (if applicable)
-```
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Describe alternatives you've considered
+      placeholder: What other solutions did you consider?
+    validations:
+      required: false
 
-## Alternatives Considered
-<!-- Describe alternatives you've considered -->
-
-## Additional Context
-<!-- Add any other context about the feature request here -->
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Add any other context about the feature request here
+      placeholder: Any additional information...
+    validations:
+      required: false

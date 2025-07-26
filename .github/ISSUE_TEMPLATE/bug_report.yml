@@ -1,43 +1,148 @@
----
-name: "Bug Report"
-about: "Create a bug report to help us fix the issue"
-title: ""
+name: Bug Report
+description: Create a bug report to help us fix the issue (including performance issues)
+title: "[Bug] "
 labels: ["bug"]
 assignees: []
----
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+        This template can be used for both functional bugs and performance issues.
 
-## Bug Description
-<!-- A clear and concise description of what the bug is -->
+  - type: textarea
+    id: issue-type
+    attributes:
+      label: Issue Type
+      description: What type of issue are you reporting?
+      placeholder: |
+        - [ ] Functional bug (feature not working as expected)
+        - [ ] Performance issue (slow execution, high memory usage, etc.)
+        - [ ] Other
+    validations:
+      required: true
 
-## Steps to Reproduce
-<!-- Steps to reproduce the behavior -->
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: Issue Description
+      description: A clear and concise description of the issue (bug or performance problem)
+      placeholder: Describe the issue...
+    validations:
+      required: true
 
-1.
-2.
-3.
-4.
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: Steps to reproduce the behavior
+      placeholder: |
+        1. Use '...'
+        2. See error
+    validations:
+      required: true
 
-## Expected Behavior
-<!-- A clear and concise description of what you expected to happen -->
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected Behavior
+      description: A clear and concise description of what you expected to happen
+      placeholder: What should have happened?
+    validations:
+      required: true
 
-## Actual Behavior
-<!-- A clear and concise description of what actually happened -->
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: Actual Behavior
+      description: A clear and concise description of what actually happened
+      placeholder: What actually happened?
+    validations:
+      required: true
 
-## Screenshots/Logs
-<!-- If applicable, add screenshots or logs to help explain your problem -->
+  - type: input
+    id: arerd-version
+    attributes:
+      label: arerd Version
+      description: Your arerd gem version
+      placeholder: e.g., 1.0.0
+    validations:
+      required: true
 
-```
-paste logs here
-```
+  - type: input
+    id: execution-time
+    attributes:
+      label: Execution Time (for performance issues)
+      description: How long does the operation take? Leave blank if not applicable
+      placeholder: e.g., 5.2 seconds
+    validations:
+      required: false
 
-## Environment
-<!-- Please complete the following information -->
+  - type: input
+    id: dataset-size
+    attributes:
+      label: Dataset Size (for performance issues)
+      description: Number of ActiveRecord models and associations. Leave blank if not applicable
+      placeholder: e.g., 50 models, 200 associations
+    validations:
+      required: false
 
-- **OS**: [e.g., Arch Linux, Ubuntu 22.04]
-- **Ruby version**: [e.g., 3.2.0]
-- **Rails version**: [e.g., 7.1.0]
-- **arerd version**: [e.g., 1.0.0]
-- **Database**: [e.g., PostgreSQL 15, MySQL 8.0]
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Please provide your environment details
+      placeholder: |
+        - OS: [e.g., Arch Linux, Ubuntu 22.04]
+        - Ruby version: [e.g., 3.2.0]
+        - Rails version: [e.g., 7.1.0]
+        - Database: [e.g., PostgreSQL 15, MySQL 8.0]
+        - Command used: [e.g., bin/rails db:erd:mermaid]
+    validations:
+      required: false
 
-## Additional Context
-<!-- Add any other context about the problem here -->
+  - type: textarea
+    id: error-logs
+    attributes:
+      label: Error Messages/Logs
+      description: If applicable, paste any error messages or relevant logs
+      placeholder: |
+        ```
+        Paste error logs here
+        ```
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: code-configuration
+    attributes:
+      label: Code/Configuration
+      description: Please provide relevant code or configuration (especially for performance issues)
+      placeholder: |
+        ```ruby
+        # Relevant ActiveRecord models or associations
+        # Any custom configuration
+        # Code that triggers the issue
+        ```
+      render: markdown
+    validations:
+      required: false
+
+  - type: textarea
+    id: expected-performance
+    attributes:
+      label: Expected Performance (for performance issues)
+      description: Describe the expected or desired performance. Leave blank if not applicable
+      placeholder: What performance do you expect?
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Add any other context about the problem here
+      placeholder: Any additional information...
+    validations:
+      required: false

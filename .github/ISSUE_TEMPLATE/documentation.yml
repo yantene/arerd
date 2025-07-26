@@ -1,44 +1,46 @@
----
-name: "Documentation Issue"
-about: "Report an issue with documentation or suggest improvements"
-title: ""
+name: Documentation Issue
+description: Report an issue with documentation or suggest improvements
+title: "[Docs] "
 labels: ["documentation"]
 assignees: []
----
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve our documentation!
 
-## Documentation Issue
-<!-- A clear and concise description of the documentation issue -->
+  - type: textarea
+    id: documentation-issue
+    attributes:
+      label: Documentation Issue
+      description: A clear and concise description of the documentation issue
+      placeholder: Describe the documentation issue...
+    validations:
+      required: true
 
-## Location
-<!-- Please specify where the documentation issue is located -->
+  - type: input
+    id: location
+    attributes:
+      label: Location
+      description: Where is the documentation issue located?
+      placeholder: e.g., README.md, lib/arerd.rb, Installation section
+    validations:
+      required: false
 
-- **File/Page**:
-- **Section**:
-- **URL**:
+  - type: textarea
+    id: suggested-improvement
+    attributes:
+      label: Suggested Improvement
+      description: How should this be improved?
+      placeholder: What changes would you suggest?
+    validations:
+      required: false
 
-## Issue Type
-<!-- Please check the applicable items -->
-
-- [ ] Information is incorrect/outdated
-- [ ] Information is missing
-- [ ] Explanation is unclear
-- [ ] Code samples don't work
-- [ ] Typos/grammar errors
-- [ ] Other
-
-## Current Content
-<!-- Please provide the current content (if applicable) -->
-
-```
-Current content here
-```
-
-## Suggested Improvement
-<!-- Please provide your suggested improvement -->
-
-```
-Improved content here
-```
-
-## Additional Context
-<!-- Add any other context about the documentation issue -->
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Add any other context about the documentation issue here
+      placeholder: Any additional information...
+    validations:
+      required: false
