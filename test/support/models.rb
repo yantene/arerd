@@ -2,7 +2,11 @@
 
 require "active_record"
 
-class User < ActiveRecord::Base
+class ApplicationRecord < ActiveRecord::Base
+  self.abstract_class = true
+end
+
+class User < ApplicationRecord
   has_many :posts, inverse_of: :user
   has_one :profile, inverse_of: :user
   has_one :avatar, through: :profile, inverse_of: :user
@@ -21,38 +25,38 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :communities, inverse_of: :users
 end
 
-class Post < ActiveRecord::Base
+class Post < ApplicationRecord
   belongs_to :user, inverse_of: :posts
 
   has_many :tags, as: :taggable, dependent: :destroy, inverse_of: :taggable
 end
 
-class Tag < ActiveRecord::Base
+class Tag < ApplicationRecord
   belongs_to :taggable, polymorphic: true, inverse_of: :tags
 end
 
-class Profile < ActiveRecord::Base
+class Profile < ApplicationRecord
   belongs_to :user, inverse_of: :profile
 
   has_one :avatar, inverse_of: :profile, dependent: :destroy
 end
 
-class Avatar < ActiveRecord::Base
+class Avatar < ApplicationRecord
   belongs_to :profile, optional: true, inverse_of: :avatar
   has_one :user, through: :profile, inverse_of: :avatar
 end
 
-class Follow < ActiveRecord::Base
+class Follow < ApplicationRecord
   belongs_to :follower, class_name: "User", inverse_of: :follows
   belongs_to :followee, class_name: "User", inverse_of: :reverse_follows
 end
 
-class Notification < ActiveRecord::Base
+class Notification < ApplicationRecord
   belongs_to :user, inverse_of: :notifications
   belongs_to :sender, class_name: "User", optional: true, inverse_of: :sent_notifications
 end
 
-class Community < ActiveRecord::Base
+class Community < ApplicationRecord
   has_and_belongs_to_many :users, inverse_of: :communities
 end
 
