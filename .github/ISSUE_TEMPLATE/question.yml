@@ -1,38 +1,75 @@
----
-name: "Question"
-about: "Ask a question about usage or troubleshooting"
-title: ""
+name: Question
+description: Ask a question about usage or troubleshooting
+title: "[Question] "
 labels: ["question"]
 assignees: []
----
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for your question! Please provide as much detail as possible.
 
-## Question
-<!-- Please state your question clearly -->
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: Please state your question clearly
+      placeholder: What would you like to know?
+    validations:
+      required: true
 
-## What are you trying to achieve?
-<!-- Describe what you're trying to accomplish -->
+  - type: textarea
+    id: goal
+    attributes:
+      label: What are you trying to achieve?
+      description: Describe what you're trying to accomplish
+      placeholder: What is your end goal?
+    validations:
+      required: true
 
-## What have you tried?
-<!-- Describe what you've already attempted -->
+  - type: textarea
+    id: attempts
+    attributes:
+      label: What have you tried?
+      description: Describe what you've already attempted
+      placeholder: |
+        1. First thing I tried...
+        2. Then I tried...
+        3. Finally I tried...
+    validations:
+      required: false
 
-1.
-2.
-3.
+  - type: textarea
+    id: code-configuration
+    attributes:
+      label: Code/Configuration
+      description: Please provide relevant code or configuration
+      placeholder: |
+        ```ruby
+        # Your code here
+        ```
+      render: markdown
+    validations:
+      required: false
 
-## Code/Configuration
-<!-- Please provide relevant code or configuration -->
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Please provide relevant environment information
+      placeholder: |
+        - OS: [e.g., Arch Linux, Ubuntu 22.04]
+        - Ruby version: [e.g., 3.2.0]
+        - Rails version: [e.g., 7.1.0]
+        - arerd version: [e.g., 1.0.0]
+    validations:
+      required: false
 
-```ruby
-# Your code here
-```
-
-## Environment
-<!-- Please complete the following information -->
-
-- **OS**: [e.g., macOS 14.0, Ubuntu 22.04]
-- **Ruby version**: [e.g., 3.2.0]
-- **Rails version**: [e.g., 7.1.0]
-- **arerd version**: [e.g., 1.0.0]
-
-## Additional Context
-<!-- Add any other context about your question -->
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Add any other context about your question here
+      placeholder: Any additional information...
+    validations:
+      required: false
