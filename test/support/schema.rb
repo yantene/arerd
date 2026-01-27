@@ -57,4 +57,14 @@ ActiveRecord::Schema.define do
     t.index :user_id
     t.index [:community_id, :user_id], unique: true
   end
+
+  # STI (Single Table Inheritance) test table
+  create_table :animals do |t|
+    t.string :type, null: false
+    t.string :name, null: false
+    t.integer :owner_id
+    t.timestamps
+  end
+  add_index :animals, :type
+  add_foreign_key :animals, :users, column: :owner_id
 end

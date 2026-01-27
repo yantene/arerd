@@ -60,4 +60,16 @@ class Community < ApplicationRecord
   has_and_belongs_to_many :users, inverse_of: :communities
 end
 
+# STI (Single Table Inheritance) models
+class Animal < ApplicationRecord
+  belongs_to :owner, class_name: "User", optional: true
+end
+
+class Dog < Animal
+end
+
+class Cat < Animal
+end
+
 MODELS = [User, Post, Tag, Profile, Avatar, Follow, Notification, Community].freeze
+MODELS_WITH_STI = [User, Post, Tag, Profile, Avatar, Follow, Notification, Community, Animal, Dog, Cat].freeze
