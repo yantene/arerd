@@ -18,8 +18,15 @@ module Arerd
       # Filter out STI child classes to avoid duplicate table definitions
       filtered_models = models.reject { |model| model.base_class != model }
 
+      # Filter associations to only include those between filtered models
+      # This removes associations referencing STI child classes
+      filtered_associations = associations.select { |association|
+        filtered_models.include?(association.left_model) &&
+          filtered_models.include?(association.right_model)
+      }
+
       template = File.read(MERMAID_TEMPLATE_PATH)
-      ERB.new(template, trim_mode: "-").result_with_hash(models: filtered_models, associations:)
+      ERB.new(template, trim_mode: "-").result_with_hash(models: filtered_models, associations: filtered_associations)
     end
 
     def self.collect_models_and_associations

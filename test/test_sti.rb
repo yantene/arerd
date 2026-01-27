@@ -38,17 +38,21 @@ describe "STI (Single Table Inheritance) Support" do
       expect(filtered_models).wont_include RegularUser
     end
 
-    it "should include AdminUser-specific associations via parent class" do
+    it "should filter out associations referencing STI child classes" do
       associations = Arerd::Association.build_associations_from_models(MODELS_WITH_STI)
       mermaid = Arerd::ErdGenerator.generate_mermaid(models: MODELS_WITH_STI, associations: associations)
 
-      # AuditLog should appear as a separate entity
+      # AuditLog entity should still appear (it's not a STI child)
       audit_log_definitions = mermaid.scan("AuditLog[").count
       expect(audit_log_definitions).must_equal 1, "AuditLog should appear in the diagram"
 
-      # The diagram should show the relationship between User (not AdminUser) and AuditLog
-      # Note: Since we filter STI children, the association points to User
-      assert_includes mermaid, "AuditLog", "AuditLog entity should be present"
+      # However, the association to AdminUser should be filtered out
+      # because AdminUser is not in the diagram
+      admin_user_audit_log_relation = mermaid.scan(/AdminUser.*AuditLog/).count
+      expect(admin_user_audit_log_relation).must_equal 0, "Association to AdminUser should be filtered out"
+
+      # AuditLog appears as an orphan entity (no associations shown)
+      # This is expected behavior until Issue #10 is implemented
     end
   end
 
@@ -74,28 +78,26 @@ describe "STI (Single Table Inheritance) Support" do
       expect(regular_user_associations.empty?).must_equal true
     end
 
-    it "demonstrates that child-specific associations reference child class" do
-      # AdminUser has audit_logs association
-      # The association references AdminUser, not User, which causes issues
-      # when we filter STI children from the diagram
+    it "should filter associations in the diagram even if collected" do
+      # AdminUser has audit_logs association, which is collected
       associations = Arerd::Association.build_associations_from_models(MODELS_WITH_STI)
 
-      # Check if audit_logs association exists with AdminUser
+      # Check if audit_logs association exists with AdminUser in collected associations
       admin_audit_log_associations = associations.select { |a|
         a.left_model.name == "AdminUser" && a.right_model.name == "AuditLog"
       }
 
-      # Check if audit_logs association exists with User (parent)
-      user_audit_log_associations = associations.select { |a|
-        a.left_model.name == "User" && a.right_model.name == "AuditLog"
-      }
-
-      # Current behavior: association references AdminUser (child), not User (parent)
+      # The association is collected (because we build from all models including STI children)
       expect(admin_audit_log_associations.empty?).must_equal false
-      expect(user_audit_log_associations.empty?).must_equal true
 
-      # This demonstrates the issue: when we filter AdminUser from the diagram,
-      # the audit_logs association is also lost because it references AdminUser
+      # However, when generating the diagram, it should be filtered out
+      mermaid = Arerd::ErdGenerator.generate_mermaid(models: MODELS_WITH_STI, associations: associations)
+
+      # AdminUser should not appear in relationships
+      expect(mermaid.include?("AdminUser")).must_equal false
+
+      # This demonstrates the fix: associations referencing filtered models
+      # are also filtered from the diagram
     end
   end
 end
