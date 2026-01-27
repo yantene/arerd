@@ -60,16 +60,19 @@ class Community < ApplicationRecord
   has_and_belongs_to_many :users, inverse_of: :communities
 end
 
-# STI (Single Table Inheritance) models
-class Animal < ApplicationRecord
-  belongs_to :owner, class_name: "User", optional: true
+# STI (Single Table Inheritance) models for User
+class AdminUser < User
+  has_many :audit_logs, foreign_key: :admin_user_id, inverse_of: :admin_user, dependent: :destroy
 end
 
-class Dog < Animal
+class RegularUser < User
+  # Regular users have all the base User associations but no admin-specific ones
 end
 
-class Cat < Animal
+# AdminUser-specific model
+class AuditLog < ApplicationRecord
+  belongs_to :admin_user, class_name: "AdminUser", inverse_of: :audit_logs
 end
 
 MODELS = [User, Post, Tag, Profile, Avatar, Follow, Notification, Community].freeze
-MODELS_WITH_STI = [User, Post, Tag, Profile, Avatar, Follow, Notification, Community, Animal, Dog, Cat].freeze
+MODELS_WITH_STI = [User, AdminUser, RegularUser, Post, Tag, Profile, Avatar, Follow, Notification, Community, AuditLog].freeze

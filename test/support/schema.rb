@@ -4,9 +4,11 @@ require "active_record"
 
 ActiveRecord::Schema.define do
   create_table :users do |t|
+    t.string :type # STI: AdminUser, RegularUser
     t.string :name, null: false, index: {unique: true}
     t.timestamps
   end
+  add_index :users, :type
 
   create_table :posts do |t|
     t.string :title, null: false, default: ""
@@ -58,13 +60,11 @@ ActiveRecord::Schema.define do
     t.index [:community_id, :user_id], unique: true
   end
 
-  # STI (Single Table Inheritance) test table
-  create_table :animals do |t|
-    t.string :type, null: false
-    t.string :name, null: false
-    t.integer :owner_id
+  # AdminUser-specific table
+  create_table :audit_logs do |t|
+    t.references :admin_user, null: false, foreign_key: {to_table: :users}
+    t.string :action, null: false
+    t.text :details
     t.timestamps
   end
-  add_index :animals, :type
-  add_foreign_key :animals, :users, column: :owner_id
 end
