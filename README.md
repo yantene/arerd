@@ -109,3 +109,7 @@ erDiagram
   User |o--o{ Notification : "sent_notifications / sender"
   Community }o--o{ User : "users / communities"
 ```
+
+## License
+
+Arerd is available as open source under the terms of the [MIT License](LICENSE).
