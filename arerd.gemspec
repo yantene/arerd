@@ -11,6 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary = "A Rails gem for generating an ERD from ActiveRecord models in Mermaid format"
   spec.description = "Provides a Rake task that extracts entity-relationship information from ActiveRecord models and generates an ER diagram in Mermaid notation."
   spec.homepage = "https://github.com/yantene/arerd"
+  spec.license = "MIT"
   spec.required_ruby_version = ">= 3.1.0"
 
   spec.metadata["allowed_push_host"] = "https://rubygems.org"
